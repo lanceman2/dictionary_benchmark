@@ -31,6 +31,19 @@ $(error "Now run './configure'")
 endif
 endif
 
+SUBDIRS :=
+
+
+ifeq ($(strip $(subst cleaner, clean, $(MAKECMDGOALS))),clean)
+SUBDIRS +=\
+ tests
+endif
+
+
+test:
+	$(MAKE) && cd tests && $(MAKE) test
+
+
 
 # Add a "clean"-like target to remove files downloaded by bootstrap:
 gitclean: cleaner
