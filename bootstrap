@@ -1,12 +1,18 @@
 #!/bin/bash
 
-# Download some files from github.com and verify them with sha512sum.
+# If we make a release for this benchmark, we must set particular git tags
+# in this file, for all the downloaded source files.
+
+set -ex
+
+# Download some files from a few different software packages and
+# (optionally) verify them with sha512sum.
 
 
-#qb_tag=9bbddd7ba52043850221df15115108f06a48105e 
 qb_tag=master
 qb_url=https://raw.githubusercontent.com/lanceman2/quickbuild/$qb_tag/quickbuild.make
 qb_sha512sum=
+
 
 debug_tag=master
 debug_url=https://raw.githubusercontent.com/lanceman2/quick/$debug_tag/
@@ -26,6 +32,9 @@ c_rbtree_private_h_sha512sum=47563a66ff477f173eb43\
 bc0dd0425c5789aca1586d4d3e1f9115224a4f7ff8828fffad\
 c8b011f
 
+# The rbtree code seems to need theses files.  An other way around using
+# them would be to make edits to the rbtree files, but that adds another
+# complication: if the rbtree source gets edited by the author of rbtree.
 c_stdaux_tag=v1.3.0
 c_stdaux_url=https://raw.githubusercontent.com/c-util/c-stdaux/$c_stdaux_tag/src/c-stdaux
 c_stdaux_generic_h_sha512sum=f0b152dda878c7eefdf\
@@ -45,8 +54,26 @@ f6bb49e10f69333300c6a5287fd64da26c7282a05f2c7787\
 83d73655f2e2471581d0c0b258dc29ae3b6e7876511a8e19\
 59a2c4836e
 
+# Looks like rax does not have any git tags created, but if we need to we
+# can nail down a particular git check-in by choosing a particular git
+# hash.
+rax_tag=master
+rax_url=https://raw.githubusercontent.com/antirez/rax/$rax_tag/rax
+rax_c_sha512sum=
+rax_h_sha512sum=
 
-set -ex
+
+# This project tends to have two name prefix's libart and art.  We picked
+# the shorter name of the two, art, for our bash variable name prefix.
+art_tag=master
+art_url=https://raw.githubusercontent.com/armon/libart/$rax_tag/src/art
+art_c_sha512sum=
+art_h_sha512sum=
+
+
+
+
+
 
 # Go to the directory there this script is.
 cd $(dirname ${BASH_SOURCE[0]})
@@ -75,21 +102,41 @@ function GetFile() {
     cd -
 }
 
+# A filename prefix for downloaded C source code files:
+pre=d_src/ # stands for Downloaded SouRCe
+
+mkdir -p $pre
+
+# Usage:
+#
 # GetFile DIR FILENAME URL [SHA512SUM]
 
+GetFile . ${pre}debug.c $debug_url/lib/debug/debug.c $debug_c_sha512sum
+GetFile . ${pre}debug.h $debug_url/include/debug.h $debug_h_sha512sum
+
+GetFile . ${pre}c-rbtree.c ${c_rbtree_url}.c $c_rbtree_c_sha512sum
+GetFile . ${pre}c-rbtree.h ${c_rbtree_url}.h $c_rbtree_h_sha512sum
+GetFile . ${pre}c-rbtree-private.h ${c_rbtree_url}-private.h $c_rbtree_private_h_sha512sum
+
+GetFile . ${pre}c-stdaux-generic.h ${c_stdaux_url}-generic.h $c_stdaux_generic_h_sha512sum
+GetFile . ${pre}c-stdaux-gnuc.h ${c_stdaux_url}-gnuc.h $c_stdaux_gnuc_h_sha512sum
+GetFile . ${pre}c-stdaux.h ${c_stdaux_url}.h $c_stdaux_h_sha512sum
+GetFile . ${pre}c-stdaux-unix.h ${c_stdaux_url}-unix.h $c_stdaux_unix_h_sha512sum
+
+GetFile . ${pre}rax.c $rax_url.c $rax_c_sha512sum
+GetFile . ${pre}rax.h $rax_url.h $rax_h_sha512sum
+
+GetFile . ${pre}art.c $art_url.c $art_c_sha512sum
+GetFile . ${pre}art.h $art_url.h $art_h_sha512sum
+
+
+# Keep this listed as the last one, because the Makefile uses this file's
+# (quickbuild.make) absence to tell (guess) if this script failed.  These
+# downloads run in series, so this is done last.  But, when someone adds a
+# new file to this list (after successfully running this script), then it
+# all goes to hell.  Okay, not really, just rerun ./bootstrap (until it
+# succeeds) and all may be fixed.
 GetFile . quickbuild.make $qb_url $qb_sha512sum
-
-GetFile . debug.c $debug_url/lib/debug/debug.c $debug_c_sha512sum
-GetFile . debug.h $debug_url/include/debug.h $debug_h_sha512sum
-
-GetFile . c-rbtree.c ${c_rbtree_url}.c $c_rbtree_c_sha512sum
-GetFile . c-rbtree.h ${c_rbtree_url}.h $c_rbtree_h_sha512sum
-GetFile . c-rbtree-private.h ${c_rbtree_url}-private.h $c_rbtree_private_h_sha512sum
-
-GetFile . c-stdaux-generic.h ${c_stdaux_url}-generic.h $c_stdaux_generic_h_sha512sum
-GetFile . c-stdaux-gnuc.h ${c_stdaux_url}-gnuc.h $c_stdaux_gnuc_h_sha512sum
-GetFile . c-stdaux.h ${c_stdaux_url}.h $c_stdaux_h_sha512sum
-GetFile . c-stdaux-unix.h ${c_stdaux_url}-unix.h $c_stdaux_unix_h_sha512sum
 
 
 set +x
