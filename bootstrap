@@ -1,24 +1,45 @@
 #!/bin/bash
 
-# If we make a release for this benchmark, we must set particular git tags
-# in this file, for all the downloaded source files.
+# If we make a release for this benchmark, we should set particular git
+# tags in this file, for all the downloaded source files.
 
 set -ex
 
 # Download some files from a few different software packages and
-# (optionally) verify them with sha512sum.
+# (optionally) verify them with sha512sum (good idea for releases).
 
 
+# This is a GNU makefile based build system that uses the GNU make include
+# command.  It's just a bunch of GNU make functions and variables that
+# make GNU make look a little like using a Makefile.am file without
+# automake.  It's not very portable, but makes your make files very small
+# and easy to read, for building and installing C/C++ code on GNU/Linux.
 qb_tag=master
 qb_url=https://raw.githubusercontent.com/lanceman2/quickbuild/$qb_tag/quickbuild.make
 qb_sha512sum=
 
 
+# A small/crappy CPP (C preprocessor) spew and assert C code that I like.
 debug_tag=master
 debug_url=https://raw.githubusercontent.com/lanceman2/quick/$debug_tag/
 debug_c_sha512sum=
 debug_h_sha512sum=
 
+
+# This project is an archived code that I personally wrote.  It may not be
+# as good as the others below.  This benchmark will tell.
+dictionary_tag=master
+dictionary_url=https://raw.githubusercontent.com/lanceman2/trieDictionary/$dictionary_tag/Dictionary
+dictionary_c_sha512sum=
+dictionary_h_sha512sum=
+
+
+# I love the way this code embeds (inserts) the node data structure in the
+# code that uses it.  It uses less memory (one less pointer) and less
+# compute (one less pointer deference), by doing so.  I expect it's the
+# kind of thing you'd put in kernel code.  I guess that is the equivalent
+# of C++ templates, but in C.  Where as C++ inheritance adds pointers
+# under the covers (or does it?).
 c_rbtree_tag=v3.1.0
 c_rbtree_url=https://raw.githubusercontent.com/c-util/c-rbtree/$c_rbtree_tag/src/c-rbtree
 c_rbtree_c_sha512sum=1ece3e1cd11aae2ba9e5954085586\
@@ -65,11 +86,11 @@ rax_h_sha512sum=
 
 # This project tends to have two name prefix's libart and art.  We picked
 # the shorter name of the two, art, for our bash variable name prefix.
+# They have a good white paper on it.
 art_tag=master
 art_url=https://raw.githubusercontent.com/armon/libart/$rax_tag/src/art
 art_c_sha512sum=
 art_h_sha512sum=
-
 
 
 
@@ -107,12 +128,16 @@ pre=d_src/ # stands for Downloaded SouRCe
 
 mkdir -p $pre
 
+
 # Usage:
 #
 # GetFile DIR FILENAME URL [SHA512SUM]
 
 GetFile . ${pre}debug.c $debug_url/lib/debug/debug.c $debug_c_sha512sum
 GetFile . ${pre}debug.h $debug_url/include/debug.h $debug_h_sha512sum
+
+GetFile . ${pre}Dictionary.c $dictionary_url.c $dictionary_c_sha512sum
+GetFile . ${pre}Dictionary.h $dictionary_url.h $dictionary_h_sha512sum
 
 GetFile . ${pre}c-rbtree.c ${c_rbtree_url}.c $c_rbtree_c_sha512sum
 GetFile . ${pre}c-rbtree.h ${c_rbtree_url}.h $c_rbtree_h_sha512sum
@@ -136,6 +161,7 @@ GetFile . ${pre}art.h $art_url.h $art_h_sha512sum
 # new file to this list (after successfully running this script), then it
 # all goes to hell.  Okay, not really, just rerun ./bootstrap (until it
 # succeeds) and all may be fixed.
+#
 GetFile . quickbuild.make $qb_url $qb_sha512sum
 
 
