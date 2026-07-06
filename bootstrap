@@ -82,6 +82,8 @@ rax_tag=master
 rax_url=https://raw.githubusercontent.com/antirez/rax/$rax_tag/rax
 rax_c_sha512sum=
 rax_h_sha512sum=
+rax_malloc_h_sha512sum=
+
 
 
 # This project tends to have two name prefix's libart and art.  We picked
@@ -150,6 +152,8 @@ GetFile . ${pre}c-stdaux-unix.h ${c_stdaux_url}-unix.h $c_stdaux_unix_h_sha512su
 
 GetFile . ${pre}rax.c $rax_url.c $rax_c_sha512sum
 GetFile . ${pre}rax.h $rax_url.h $rax_h_sha512sum
+GetFile . ${pre}rax_malloc.h ${rax_url}_malloc.h $rax_malloc_h_sha512sum
+
 
 GetFile . ${pre}art.c $art_url.c $art_c_sha512sum
 GetFile . ${pre}art.h $art_url.h $art_h_sha512sum

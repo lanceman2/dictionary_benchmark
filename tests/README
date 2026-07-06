@@ -1,0 +1,7 @@
+For the most part these tests are just to test compiling and running of
+the software that we are benchmarking.  If we find problems when running
+the benchmark we may add additional test programs to overcome said
+problems.  These tests are just a starter tool to get used to the codes we
+are benchmarking.  If we find an interface we don't understand we'll add
+a test to get to understand it.
+
