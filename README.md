@@ -63,17 +63,27 @@ choosing, in a directory of you choosing:
 ```bash
  tag=master\
 &&\
+ dir=dictionary_benchmarkX\
+&&\
  tarfile=dictionary_benchmark-tar.gz\
 &&\
  wget --no-check-certificate\
  https://github.com/lanceman2/dictionary_benchmark/tarball/$tag\
  -O $tarfile\
 &&\
- mkdir dictionary_benchmark\
+ mkdir $dir\
 &&\
- cd dictionary_benchmark\
+ cd $dir\
 &&\
- tar --strip-components=1 -xzf ../$tarfile
+ tar --strip-components=1 -xzf ../$tarfile\
+&&\
+ ./boostrap\
+&&\
+ ./configure\
+&&\
+ make\
+&&\
+ ./run
 ```
 
 The above script is a little complex in order to make it work without

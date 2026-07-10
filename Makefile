@@ -44,6 +44,26 @@ test:
 	$(MAKE) && cd tests && $(MAKE) test
 
 
+CPPFLAGS := -Id_src -DNO_LIBDEBUG_CONSTRUCTOR
+
+define MkRun
+run_$(1)_SOURCES := run.c d_src/debug.c d_src/$(1).c getKey.c
+run_$(1)_CPPFLAGS := -DDICTIONARY_WRAPPER=\"$(1).h\"
+runners += run_$(1)
+endef
+
+
+# Example package test is in rax.h makes run_rax from rax.h and run.c
+packages := rax c-rbtree Dictionary
+
+build: $(runners)
+
+$(foreach arg,$(packages),$(eval $(call MkRun,$(arg))))
+
+run_rax_CPPFLAGS += -Wno-use-after-free # rax.c has a compiler warning
+run_rax_LDFLAGS := -lm
+
+
 
 # Add a "clean"-like target to remove files downloaded by bootstrap:
 gitclean: cleaner
