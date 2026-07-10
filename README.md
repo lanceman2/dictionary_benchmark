@@ -63,7 +63,11 @@ choosing, in a directory of you choosing:
 ```bash
  tag=master\
 &&\
- dir=/tmp/xx_dictionary_benchmark\
+ dir=xx_dictionary_benchmark\
+&&\
+ mkdir $dir\
+&&\
+ cd $dir\
 &&\
  tarfile=dictionary_benchmark-tar.gz\
 &&\
@@ -71,11 +75,7 @@ choosing, in a directory of you choosing:
  https://github.com/lanceman2/dictionary_benchmark/tarball/$tag\
  -O $tarfile\
 &&\
- mkdir $dir\
-&&\
- cd $dir\
-&&\
- tar --strip-components=1 -xzf ../$tarfile\
+ tar --strip-components=1 -xzf $tarfile\
 &&\
  ./bootstrap\
 &&\
