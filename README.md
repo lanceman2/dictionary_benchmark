@@ -63,7 +63,7 @@ choosing, in a directory of you choosing:
 ```bash
  tag=master\
 &&\
- dir=xx_dictionary_benchmark\
+ dir=/tmp/xx_dictionary_benchmark\
 &&\
  tarfile=dictionary_benchmark-tar.gz\
 &&\
