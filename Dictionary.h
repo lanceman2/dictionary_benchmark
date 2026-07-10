@@ -1,6 +1,6 @@
 
 // This defines inline wrapper functions and structures to run the
-// benchmark using the rax package.
+// benchmark using the Dictionary package.
 
 #include <errno.h>
 
@@ -41,3 +41,9 @@ static inline bool tree_remove(struct Tree *d, char *s, size_t len) {
 
     return false;
 }
+
+static inline void  *tree_find(struct Tree *d, char *s, size_t len) {
+
+    return qsDictionaryFind((void *) d, s);
+}
+

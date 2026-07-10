@@ -15,8 +15,9 @@
 static_assert(MaxLen > 2);
 
 static char key[MaxLen + 1];
-// We limit the alphabet so as to get more duplicate keys.
-static const char *Encode = "ABCDEFG";
+// We can limit the alphabet so as to get more duplicate keys.
+static const char *Encode = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//static const char *Encode = "ABC";
 #define MinLen (2)
 
 static_assert(MinLen <= MaxLen);

@@ -61,7 +61,6 @@ static inline bool tree_remove(struct Tree *d, char *s, size_t len) {
     }
     if(!i) {
         //ERROR("Node \"%s\" was not found", s);
-        // This thread pool, tp, is not in this list.
         return true;
     }
 
@@ -102,6 +101,8 @@ static inline bool tree_insert(struct Tree *d, char *s,
 
     CRBNode **i = &d->tree.root;
     CRBNode *parent = 0;
+
+    //ERROR("Inserting \"%s\"", s);
 
     while(*i) {
 
@@ -146,9 +147,36 @@ static inline bool tree_insert(struct Tree *d, char *s,
 }
 
 
-static inline void tree_print(struct Tree *d) {
+static inline void *tree_find(struct Tree *d, char *s, size_t len) {
 
+    CRBNode **i = &d->tree.root;
+    CRBNode *parent = 0;
 
+    while(*i) {
+
+        parent = *i;
+
+        struct Node *n = c_rbnode_entry(*i, struct Node, node);
+
+        DASSERT(n);
+        DASSERT(n->key);
+
+        int cmp = strncmp(s, n->key, len);
+
+        if(cmp < 0)
+            i = &parent->left;
+        else if(cmp > 0)
+            i = &parent->right;
+        else {
+            // Found it.
+            //ERROR("Found \"%s\": %p", s, (void *) n->value);
+            return (void *) n->value;
+        }
+    }
+
+    //ERROR("Node \"%s\" was not found", s);
+    return 0;
 }
 
+static inline void tree_print(struct Tree *d) {}
 

@@ -1,21 +1,18 @@
 #!/bin/bash
 
 
-n=10000000
+#n=1000000
+n=1000000
 
 
 set -e
 
 cd "$(dirname ${BASH_SOURCE[0]})"
 
-
-packages="Dictionary c-rbtree rax"
+packages="dummy Dictionary c-rbtree rax art"
 
 for i in $packages ; do
-    echo
-    run="./run_$i $n"
-    echo $run
-    $run
+    ./run_$i $n
 done
 
 echo

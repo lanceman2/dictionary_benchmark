@@ -169,5 +169,8 @@ GetFile . ${pre}art.h $art_url.h $art_h_sha512sum
 GetFile . quickbuild.make $qb_url $qb_sha512sum
 
 
+touch d_src/dummy.c
+
+
 set +x
 echo -e "\n$0 Success"

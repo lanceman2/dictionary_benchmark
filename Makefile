@@ -54,11 +54,12 @@ endef
 
 
 # Example package test is in rax.h makes run_rax from rax.h and run.c
-packages := rax c-rbtree Dictionary
+packages := rax c-rbtree Dictionary art dummy
 
 build: $(runners)
 
 $(foreach arg,$(packages),$(eval $(call MkRun,$(arg))))
+
 
 run_rax_CPPFLAGS += -Wno-use-after-free # rax.c has a compiler warning
 run_rax_LDFLAGS := -lm

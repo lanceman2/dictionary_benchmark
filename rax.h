@@ -47,3 +47,8 @@ static inline bool tree_remove(struct Tree *d, char *s, size_t len) {
 
     return false;
 }
+
+static inline void  *tree_find(struct Tree *d, char *s, size_t len) {
+
+    return raxFind(&d->rax, (void *) s, len);
+}

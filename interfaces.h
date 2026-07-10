@@ -20,6 +20,8 @@ static inline bool tree_insert(struct Tree *d, char *s,
 
 static inline bool tree_remove(struct Tree *d, char *s, size_t len);
 
+static inline void  *tree_find(struct Tree *d, char *s, size_t len);
+
 // Print to stdout
 static inline void tree_print(struct Tree *d);
 
