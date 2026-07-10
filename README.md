@@ -99,8 +99,7 @@ developers of this software package, quickly see our results.
 ## List of packages/modules benchmarked
 
 This is a list of the software packages (or parts there of) that are
-benchmarked.  Some software packages may be benchmarked more than once
-using different configurations and/or software versions.
+benchmarked.
 
 ### rax
 
@@ -110,9 +109,6 @@ https://github.com/antirez/rax.git
 ### libart
 
 https://github.com/armon/libart.git
-
-
-### C++ map
 
 
 ### c-rbtree
