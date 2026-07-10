@@ -6,15 +6,7 @@ n=10000000
 
 set -e
 
-
-if ! which valgrind > /dev/null ; then
-    echo "valgrind was not found in your PATH"
-    exit 1
-fi
-
 cd "$(dirname ${BASH_SOURCE[0]})"
-
-pre="$PWD"
 
 
 packages="Dictionary c-rbtree rax"
