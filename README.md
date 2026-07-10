@@ -77,7 +77,7 @@ choosing, in a directory of you choosing:
 &&\
  tar --strip-components=1 -xzf ../$tarfile\
 &&\
- ./boostrap\
+ ./bootstrap\
 &&\
  ./configure\
 &&\
