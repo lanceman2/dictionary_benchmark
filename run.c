@@ -105,7 +105,7 @@ int main(int argc, char **argv) {
 
     tree_destroy(d);
 
-    printf("%zu Finds in ", N_FIND_LOOPS*n);
+    printf("%d x %zu Finds in ", N_FIND_LOOPS, n);
     PrintTime(&t0);
 
     struct rusage usage;
