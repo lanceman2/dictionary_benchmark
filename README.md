@@ -58,7 +58,7 @@ protection; at least don't run this script as the root user.  Running this
 script will download software packages, including this one, and others.
 
 To get the benchmark image results, run this script in a "sandbox" of your
-choosing, in a directory of you choosing:
+choosing, in a directory of your choosing:
 
 ```bash
  tag=master\
