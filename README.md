@@ -57,8 +57,8 @@ We recommend you do not run strange scripts that you do not trust without
 protection; at least don't run this script as the root user.  Running this
 script will download software packages, including this one, and others.
 
-To get the benchmark image results, run this script in a "sandbox" of your
-choosing, in a directory of your choosing:
+To get the benchmark image results, run this bash script in a "sandbox" of
+your choosing, in a directory of your choosing:
 
 ```bash
  tag=master\
