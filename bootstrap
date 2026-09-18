@@ -90,7 +90,7 @@ rax_malloc_h_sha512sum=
 # the shorter name of the two, art, for our bash variable name prefix.
 # They have a good white paper on it.
 art_tag=master
-art_url=https://raw.githubusercontent.com/armon/libart/$rax_tag/src/art
+art_url=https://raw.githubusercontent.com/armon/libart/$art_tag/src/art
 art_c_sha512sum=
 art_h_sha512sum=
 
