@@ -13,11 +13,7 @@ script.  We require that the source code not change for a given URL so
 that test results are automatic and somewhat reproducible.
 
 It would seem that the world runs on dictionaries built on red black
-trees, so we'll have at least one test case that uses a red black tree,
-maybe even the C++ standard library map class (which is a red black tree);
-given C++ and C get along well and C++ is well standardized.  We expect
-the red black tree based cases to be the least preferment, at least for
-speed.
+trees, so we'll have at least one test case that uses a red black tree.
 
 The idea of this software project is to have one script that you run that
 automatically downloads, builds software, and generates plot image files
@@ -89,7 +85,7 @@ your choosing, in a directory of your choosing:
 The above script is a little complex in order to make it work without
 user interactivity; like finding githubs generated tar file name.  But, of
 course, you can just make your own script(s) to run the benchmark by using
-that script as a hint.
+the above script as a hint.
 
 We keep the above script working in order automate our testing of this
 software package, and at the same time letting users, that are not
