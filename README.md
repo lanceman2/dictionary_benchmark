@@ -99,17 +99,17 @@ benchmarked.
 
 ### rax
 
-https://github.com/antirez/rax.git
+https://github.com/antirez/rax
 
 
 ### libart
 
-https://github.com/armon/libart.git
+https://github.com/armon/libart
 
 
 ### c-rbtree
 
-https://github.com/c-util/c-rbtree.git
+https://github.com/c-util/c-rbtree
 
 
 
